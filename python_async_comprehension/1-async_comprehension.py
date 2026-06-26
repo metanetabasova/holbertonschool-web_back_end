@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 Bu modul asinxron generator üzərində async comprehension
-istifadə edərək məlumatların toplanmasını nümayiş etdirir.
+istifadə edərək məlumatların toplanmasını təmin edir.
 """
 import asyncio
 from typing import List
 
-async_generator = __import__('5-index_coroutine').async_generator
+async_generator = __import__('0-async_generator').async_generator
 
 
 async def async_comprehension() -> List[float]:
