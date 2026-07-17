@@ -13,7 +13,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
-        """Initialize class."""
+        """Initialize the server."""
         self.__dataset = None
         self.__indexed_dataset = None
 
@@ -39,8 +39,7 @@ class Server:
 
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = None,
-                        page_size: int = 10) -> Dict:
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
         Return a deletion-resilient page of data.
         """
@@ -49,7 +48,7 @@ class Server:
         if index is None:
             index = 0
 
-        assert 0 <= index <= max(indexed_data.keys())
+        assert 0 <= index < len(self.dataset())
 
         data = []
         current_index = index
