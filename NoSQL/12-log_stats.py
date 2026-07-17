@@ -1,3 +1,4 @@
+cat << 'EOF' > 12-log_stats.py
 #!/usr/bin/env python3
 """
 Module documentation for providing stats about Nginx logs stored in MongoDB.
@@ -12,18 +13,15 @@ def log_stats():
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
 
-    # Ümumi sənəd sayı
     total_logs = nginx_collection.count_documents({})
     print(f"{total_logs} logs")
 
-    # Metodlar üzrə statistika
     print("Methods:")
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     for method in methods:
         count = nginx_collection.count_documents({"method": method})
         print(f"\tmethod {method}: {count}")
 
-    # Xüsusi status yoxlaması (method=GET, path=/status)
     status_check = nginx_collection.count_documents(
         {"method": "GET", "path": "/status"}
     )
@@ -32,3 +30,4 @@ def log_stats():
 
 if __name__ == "__main__":
     log_stats()
+EOF
