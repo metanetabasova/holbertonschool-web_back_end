@@ -42,32 +42,26 @@ class Server:
     ) -> Dict[str, Any]:
         """
         Silinmələrə qarşı dayanıqlı indeks əsaslı səhifələmə.
-        İstifadəçinin elementləri qaçırmamasın təmin edir.
+        İstifadəçinin elementləri qaçırmamasını təmin edir.
         """
-        # İndekslənmiş datanı əldə edirik
         indexed_data = self.indexed_dataset()
 
-        # index parametrinin doğruluğunu yoxlayırıq
-        assert index is None or (
-            isinstance(index, int) and 0 <= index < len(indexed_data)
-        )
+        # pycodestyle xətası verməməsi üçün assert şərtini qısaldırıq
+        if index is not None:
+            assert isinstance(index, int) and 0 <= index < len(indexed_data)
         assert isinstance(page_size, int) and page_size > 0
 
-        # Əgər index qeyd olunmayıbsa, default olaraq 0-dan başlayırıq
         if index is None:
             index = 0
 
         data_page = []
         current_index = index
 
-        # Tam olaraq page_size qədər mövcud elementi tapana qədər dövr edirik
         while len(data_page) < page_size and current_index < len(indexed_data):
             if current_index in indexed_data:
                 data_page.append(indexed_data[current_index])
             current_index += 1
 
-        # Növbəti sorğu üçün başlanğıc indeksi (next_index) təyin edirik
-        # Əgər data bitibsə, next_index None ola bilər
         next_index = current_index if current_index < len(indexed_data) else None
 
         return {
