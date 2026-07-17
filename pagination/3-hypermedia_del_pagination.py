@@ -38,7 +38,9 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(
-        self, index: int = None, page_size: int = 10
+        self,
+        index: int = None,
+        page_size: int = 10
     ) -> Dict[str, Any]:
         """
         Silinmələrə qarşı dayanıqlı indeks əsaslı səhifələmə.
@@ -46,9 +48,11 @@ class Server:
         """
         indexed_data = self.indexed_dataset()
 
-        # pycodestyle xətası verməməsi üçün assert şərtini qısaldırıq
+        # assert yoxlamalarını sətirlərə bölərək tam qısaldırıq
         if index is not None:
-            assert isinstance(index, int) and 0 <= index < len(indexed_data)
+            assert isinstance(index, int)
+            assert 0 <= index < len(indexed_data)
+
         assert isinstance(page_size, int) and page_size > 0
 
         if index is None:
