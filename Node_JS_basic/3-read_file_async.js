@@ -34,7 +34,7 @@ const countStudents = (dataPath) => new Promise((resolve, reject) => {
     });
 
     Object.keys(fields).forEach((field) => {
-      console.log(`umber of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`);
+      console.log(`Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`);
     });
 
     resolve(true);
