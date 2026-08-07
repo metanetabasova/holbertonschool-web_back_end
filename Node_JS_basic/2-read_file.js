@@ -8,7 +8,7 @@ const countStudents = (dataPath) => {
   const content = fs.readFileSync(dataPath, 'utf-8');
   const lines = content.split('\n').filter((line) => line.trim().length > 0);
 
-  if (llines.length <= 1) {
+  if (lines.length <= 1) {
     console.log('Number of students: 0');
     return;
   }
@@ -16,7 +16,7 @@ const countStudents = (dataPath) => {
   const studentLines = lines.slice(1);
   console.log(`Number of students: ${studentLines.length}`);
 
-  const fields ={};
+  const fields = {};
 
   studentLines.forEach((line) => {
     const studentData = line.split(',');
