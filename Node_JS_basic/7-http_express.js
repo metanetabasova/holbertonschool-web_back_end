@@ -1,7 +1,9 @@
 const express = require('express');
 const fs = require('fs');
 
-const DB_FILE = (dataPath) => new Promise((resolve, reject) => {
+const DB_FILE = process.argv[2] || '';
+
+const countStudents = (dataPath) => new Promise((resolve, reject) => {
   if (!dataPath) {
     reject(new Error('Cannot load the database'));
     return;
@@ -20,9 +22,9 @@ const DB_FILE = (dataPath) => new Promise((resolve, reject) => {
     }
 
     const studentLines = lines.slice(1);
-    const responseParts =[`Number of students: ${studentLines.length}`];
+    const responseParts = [`Number of students: ${studentLines.length}`];
 
-    const fields ={};
+    const fields = {};
 
     studentLines.forEach((line) => {
       const studentData = line.split(',');
@@ -48,7 +50,11 @@ const DB_FILE = (dataPath) => new Promise((resolve, reject) => {
 const app = express();
 const port = 1245;
 
-app.length('/', (req, res) => {
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
+});
+
+app.get('/students', (req, res) => {
   countStudents(DB_FILE)
     .then((data) => {
       res.send(`This is the list of our students\n${data}`);
