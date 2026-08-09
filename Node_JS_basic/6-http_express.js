@@ -1,15 +1,12 @@
-import express from 'express';
+const express = require('express');
 
 const app = express();
-const PORT = 1245;
+const port = 1245;
 
-app.length('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server runnig on port ${PORT}`);
-});
+app.listen(port);
 
 module.exports = app;
-export default app;
